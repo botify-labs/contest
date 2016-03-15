@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 
+import './LanguageChooser.scss';
 
 export default class LanguageChooser extends React.Component {
 
@@ -24,7 +25,7 @@ export default class LanguageChooser extends React.Component {
   render() {
     return (
       <div className="LanguageChooser">
-        <h2>Choose your side</h2>
+        <h1>Choose your side</h1>
         <div className="LanguageChooser-choice">
           <button onClick={this.handleChooseJs}>JS</button>
           <span>vs</span>

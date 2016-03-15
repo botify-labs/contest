@@ -2,6 +2,8 @@ import React from 'react';
 import LanguageChooser from './LanguageChooser';
 import Playground from './Playground';
 
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 export default class App extends React.Component {
 
@@ -35,7 +37,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App container-fluid">
         { this.renderContent() }
       </div>
     );
