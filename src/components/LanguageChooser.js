@@ -14,6 +14,14 @@ export default class LanguageChooser extends React.Component {
     this.handleChoosePython = this.handleChoosePython.bind(this);
   }
 
+  componentWillMount() {
+    document.body.className += 'color-main';
+  }
+
+  componentWillUnmount() {
+    document.body.className = document.body.className.replace('color-main', '');
+  }
+
   handleChooseJs() {
     this.props.onChoose('javascript');
   }

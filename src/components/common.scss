@@ -1,1 +1,5 @@
 $main-color: #47c9af;
+
+body.color-main {
+  background-color: $main-color !important;
+}

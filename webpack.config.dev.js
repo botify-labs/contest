@@ -64,6 +64,10 @@ module.exports = {
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file?' + JSON.stringify(fontConfig) },
       { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'file?' + JSON.stringify(fontConfig) },
       {
+        test: /\.txt$/,
+        loaders: ['raw'],
+      },
+      {
         test: /\.jsx?$/,
         loaders: ['babel'],
         include: [
