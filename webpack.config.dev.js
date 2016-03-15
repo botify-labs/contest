@@ -10,22 +10,28 @@ module.exports = {
     // listen to code updates emitted by hot middleware:
     'webpack-hot-middleware/client',
     // your code:
-    './src/index'
+    './src/index',
   ],
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
+  },
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/dist/'
+    publicPath: '/dist/',
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
   ],
   module: {
     loaders: [{
-      test: /\.js$/,
+      test: /\.jsx?$/,
       loaders: ['babel'],
-      include: path.join(__dirname, 'src')
-    }]
-  }
+      include: [
+        path.join(__dirname, 'src'),
+        /react-ace-async/,
+      ],
+    }],
+  },
 };
