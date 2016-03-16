@@ -20,7 +20,7 @@
     "playground",
     "contest",
     "platform",
-    "docker",
+    "docker"
   ],
   "author": "Botify <labs@botify.com> (http://github.com/botify)",
   "license": "MIT",
