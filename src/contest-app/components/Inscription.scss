@@ -1,0 +1,57 @@
+@import './common.scss';
+
+
+.Inscription {
+  height: 100%;
+  color: #fff;
+  text-align: center;
+  margin-top: -5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h1 {
+    font-size: 60px;
+    margin-bottom: 50px;
+  }
+
+  input {
+    width: 70%;
+    margin: 40px auto;
+    padding-bottom: 5px;
+    background-color: transparent;
+    border: 0 !important;
+    border-bottom: 3px solid #fff !important;
+    box-shadow: none !important;
+    font-size: 32px;
+    color: #fff;
+    height: inherit;
+    text-align: center;
+
+    &::placeholder {
+      color: #fff;
+    }
+  }
+
+  button {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: inherit;
+    font-size: 32px;
+    line-height: 32px;
+    border: 6px solid #fff;
+    transition-property: color, background-color;
+    transition-duration: 0s;
+    transition-timing-function: linear;
+
+    &:not([disabled]):hover {
+      transition-duration: 1s;
+      background-color: #fff;
+      color: $color-main;
+    }
+
+    &:disabled:hover {
+      color: #fff;
+    }
+  }
+}

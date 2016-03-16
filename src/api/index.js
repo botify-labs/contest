@@ -19,5 +19,11 @@ api.post('/test-code', (req, res) => {
   });
 });
 
+api.post('/register', (req, res) => {
+  const { name, email, language, code, timeMs } = req.body;
+
+  res.status(201).end();
+});
+
 
 export default api;

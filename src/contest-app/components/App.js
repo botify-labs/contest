@@ -1,6 +1,8 @@
 import React from 'react';
 import LanguageChooser from './LanguageChooser';
 import Playground from './Playground';
+import Inscription from './Inscription';
+import ThankYou from './ThankYou';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -11,8 +13,12 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       language: null,
+      result: null,
+      registered: false,
     };
     this.handleLanguageSelection = this.handleLanguageSelection.bind(this);
+    this.handlePlaygroundSave = this.handlePlaygroundSave.bind(this);
+    this.handleRegistered = this.handleRegistered.bind(this);
   }
 
   handleLanguageSelection(language) {
@@ -21,8 +27,20 @@ export default class App extends React.Component {
     });
   }
 
+  handlePlaygroundSave(result) {
+    this.setState({
+      result,
+    });
+  }
+
+  handleRegistered() {
+    this.setState({
+      registered: true,
+    });
+  }
+
   renderContent() {
-    const { language } = this.state;
+    const { language, result, registered } = this.state;
 
     if (!language) {
       return (
@@ -30,9 +48,19 @@ export default class App extends React.Component {
       );
     }
 
-    return (
-      <Playground language={language} />
-    );
+    if (!result) {
+      return (
+        <Playground language={language} onSave={this.handlePlaygroundSave} />
+      );
+    }
+
+    if (!registered) {
+      return (
+        <Inscription language={language} result={result} onRegistered={this.handleRegistered} />
+      );
+    }
+
+    return <ThankYou />
   }
 
   render() {

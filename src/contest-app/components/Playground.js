@@ -14,6 +14,7 @@ class Playground extends React.Component {
 
   static propTypes = {
     language: PropTypes.string.isRequired,
+    onSave: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -40,19 +41,26 @@ class Playground extends React.Component {
       testing: true,
     });
 
-    testCode(language, editorValue).then((result) => {
+    testCode({ language, code: editorValue }).then((result) => {
       const { bestResult } = this.state;
       this.setState({
         result,
         testing: false,
-        bestResult: result.success &&
-                    (!bestResult || result.timeMs < bestResult.timeMs) ? result : bestResult,
+        bestResult: result.success && (!bestResult || result.timeMs < bestResult.timeMs) ? {
+          success: result.success,
+          timeMs: result.timeMs,
+          code: editorValue,
+        } : bestResult,
       });
     });
   }
 
   handleSavePlayground() {
-    // @TODO
+    const { bestResult } = this.state;
+    this.props.onSave({
+      timeMs: bestResult.timeMs,
+      code: bestResult.code,
+    });
   }
 
   render() {
