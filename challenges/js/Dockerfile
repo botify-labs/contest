@@ -9,7 +9,7 @@ RUN apk update && \
 
 ADD js /app
 
-ADD palindrome /app
+ADD palindrome /app/palindrome
 
 VOLUME /contest
 
