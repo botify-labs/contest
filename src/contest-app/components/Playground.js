@@ -43,7 +43,8 @@ class Playground extends React.Component {
       this.setState({
         result,
         testing: false,
-        bestResult: !bestResult || result.timeMs < bestResult.timeMs ? result : bestResult,
+        bestResult: result.success &&
+                    (!bestResult || result.timeMs < bestResult.timeMs) ? result : bestResult,
       });
     });
   }
