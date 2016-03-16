@@ -15,17 +15,17 @@ api.post('/test-code', (req, res) => {
   const { language, code } = req.body;
 
   let codeFile;
-  let challengeFolder;
+  let dockerImage;
   switch(language) {
     case 'javascript':
       codeFile = 'tmp/test.js';
-      challengeFolder = 'botify/contest/js';
+      dockerImage = 'botify/contest/js';
       break;
   }
 
   writeFileSync(codeFile, code);
   const startTime = new Date();
-  exec('docker run -t --rm -v $(pwd)/tmp:/contest ' + challengeFolder, (err, stdout) => {
+  exec('docker run -t --rm -v $(pwd)/tmp:/contest ' + dockerImage, (err, stdout) => {
     const executionTime = new Date() - startTime;
     res.json({
       success: err === null,
