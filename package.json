@@ -9,10 +9,7 @@
     "build": "npm run clean && npm run build:webpack",
     "start": "node start.js",
     "lint": "eslint src",
-    "build:docker": "docker build -t botify/contest .",
-    "start:dind": "docker run --privileged --name contest-dind -d docker:1-dind",
-    "start:docker": "docker run -d --link contest-dind:docker --name contest botify/contest",
-    "start:contest": "npm run start:dind && npm run start:docker"
+    "build:docker:js": "docker build -t botify/contest/js -f test/js/Dockerfile test"
   },
   "repository": {
     "type": "git",

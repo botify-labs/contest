@@ -6,8 +6,10 @@ RUN apk update && \
     apk add nodejs && \
     npm install -g mocha
 
-ADD . /app
+ADD js /app
 
-VOLUME /app/contest
+ADD palindrome /app
+
+VOLUME /contest
 
 CMD mocha index.js

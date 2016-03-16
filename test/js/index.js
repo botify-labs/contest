@@ -1,7 +1,7 @@
 const assert = require('assert')
 const fs = require('fs')
 
-const contest = require('./contest')
+const contest = require('/contest/test.js')
 
 const fileContent = fs.readFileSync('./palindrome', { encoding: 'utf8' })
 
