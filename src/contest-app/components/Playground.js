@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import AceEditor from 'react-ace-async';
 import cx from 'classnames';
 
-import { testCode } from '../resources/mock';
+import { testCode } from '../resources/api';
 import * as playgroundBoilerplates from '../resources/playgroundBoilerplates';
 
 import './Playground.scss';
