@@ -4,6 +4,6 @@
  * @param  {String} input  string to evaluate
  * @return {Boolean}
  */
-export default function (input) {
+export function isPalindrome(input) {
   return true;
 }
