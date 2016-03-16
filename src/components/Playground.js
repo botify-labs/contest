@@ -37,7 +37,6 @@ class Playground extends React.Component {
       editorValue,
       testing: true,
     });
-    console.log('run', editorValue);
 
     testCode(language, editorValue).then((result) => {
       const { bestResult } = this.state;
@@ -98,7 +97,7 @@ class Playground extends React.Component {
               <div
                 className={cx(
                   'Playground-resultTime',
-                  result.success ? 'btn-success' : 'btn-danger'
+                  result.success ? 'success' : 'danger'
                 )}
               >
                 {result.success ? `${result.timeMs} ms` : 'Tests failed'}
@@ -114,14 +113,16 @@ class Playground extends React.Component {
             </button>
             <button
               className={cx(
-                'Playground-actions-run form-control',
-                bestResult && bestResult.success && 'btn-success',
+                'Playground-actions-save form-control',
+                bestResult && bestResult.success && 'btn-primary',
               )}
               onClick={this.handleSavePlayground}
               disabled={!bestResult || !bestResult.success}
             >
               Save
-              {bestResult && bestResult.success && `(best time: ${bestResult.timeMs} ms)`}
+              {bestResult && bestResult.success &&
+                <span>{`(best time: ${bestResult.timeMs} ms)`}</span>
+              }
             </button>
           </div>
         </div>
