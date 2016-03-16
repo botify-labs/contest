@@ -9,9 +9,7 @@
 ## Installation
 
 ```bash
-cd react-transform-boilerplate
 npm install
-npm run install:db
 ```
 
 ## Run
