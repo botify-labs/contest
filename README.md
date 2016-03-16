@@ -1,14 +1,17 @@
 # Botify Contest Platform
 
-## Requirments
+## Requirements
 
 - Node
+- Python
+- Docker
 
 ## Installation
 
 ```bash
 cd react-transform-boilerplate
 npm install
+npm run install:db
 ```
 
 ## Run
