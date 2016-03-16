@@ -9,7 +9,7 @@ import * as playgroundBoilerplates from '../resources/playgroundBoilerplates';
 
 import './Playground.scss';
 AceEditorConfig.ACE_CDN = 'ace.js';
-const ansiToHTML = new AnsiToHTML({ newline: true, bg: '#FFF', fg: '#000' });
+const ansiToHTML = new AnsiToHTML({ newline: true });
 
 
 class Playground extends React.Component {
@@ -41,6 +41,7 @@ class Playground extends React.Component {
     this.setState({
       editorValue,
       testing: true,
+      result: null,
     });
 
     testCode({ language, code: editorValue }).then((result) => {
@@ -116,11 +117,20 @@ class Playground extends React.Component {
                 {result.success ? `${result.timeMs} ms` : 'Tests failed'}
               </div>
             }
+            {testing &&
+              <div className="Playground-loaderContainer">
+                <i className="fa fa-spinner fa-spin"></i>
+              </div>
+            }
           </div>
           <div className="Playground-actions">
             <button
-              className="Playground-actions-run form-control btn-warning"
+              className={cx(
+                'Playground-actions-run form-control',
+                !testing && 'btn-warning'
+              )}
               onClick={this.handleRunPlayground}
+              disabled={testing}
             >
               Run
             </button>

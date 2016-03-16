@@ -29,6 +29,7 @@ app.get('/', (req, res) => {
 
 // Serve Ace Editor sources locally (it requires files using RequireJS)
 app.use(express.static('node_modules/ace-builds/src-min'));
+app.use(express.static('node_modules/font-awesome'));
 
 app.listen(3000, (err) => {
   if (err) {

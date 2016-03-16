@@ -44,12 +44,17 @@
       flex-direction: column;
       flex: 1 1 auto;
       margin-bottom: 5px;
+      text-align: center;
+      justify-content: center;
 
       .Playground-resultPreview {
         flex: 1 1 auto;
         overflow: auto;
         background-color: #20211C;
         margin-bottom: 5px;
+        text-align: left;
+        color: #E6E4E4;
+        padding: 0 3px;
       }
 
       .Playground-resultTime {
@@ -69,6 +74,10 @@
         &.danger {
           background-color: #d9534f;
         }
+      }
+
+      .Playground-loaderContainer {
+        font-size: 32px;
       }
     }
 

@@ -71,6 +71,7 @@
     "classnames": "^2.2.3",
     "email-validator": "^1.0.4",
     "express": "^4.13.3",
+    "font-awesome": "^4.5.0",
     "react": "^0.14.7",
     "react-ace-async": "botify-labs/react-ace-async#master",
     "react-dom": "^0.14.7",
