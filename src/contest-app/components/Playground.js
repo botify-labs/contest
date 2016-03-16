@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import AceEditor from 'react-ace-async';
 import * as AceEditorConfig from 'react-ace-async/src/config';
+import AnsiToHTML from 'ansi-to-html';
 import cx from 'classnames';
 
 import { testCode } from '../resources/api';
@@ -8,6 +9,7 @@ import * as playgroundBoilerplates from '../resources/playgroundBoilerplates';
 
 import './Playground.scss';
 AceEditorConfig.ACE_CDN = 'ace.js';
+const ansiToHTML = new AnsiToHTML({ newline: true, bg: '#FFF', fg: '#000' });
 
 
 class Playground extends React.Component {
@@ -97,13 +99,11 @@ class Playground extends React.Component {
         <div className="Playground-rightSide">
           <div className="Playground-result">
             {result &&
-              <AceEditor
+              <div
                 className="Playground-resultPreview"
-                id="Playground-resultPreview"
-                theme="monokai"
-                mode="sh"
-                value={result.stdout}
-                readOnly
+                dangerouslySetInnerHTML={{
+                  __html: ansiToHTML.toHtml(result.stdout),
+                }}
               />
             }
             {result &&

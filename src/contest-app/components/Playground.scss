@@ -47,6 +47,9 @@
 
       .Playground-resultPreview {
         flex: 1 1 auto;
+        overflow: auto;
+        background-color: #20211C;
+        margin-bottom: 5px;
       }
 
       .Playground-resultTime {

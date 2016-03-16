@@ -70,6 +70,10 @@ module.exports = {
         loaders: ['raw'],
       },
       {
+        test: /\.json$/,
+        loaders: ['json'],
+      },
+      {
         test: /\.jsx?$/,
         loaders: ['babel'],
         include: [
