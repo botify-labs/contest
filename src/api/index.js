@@ -1,4 +1,4 @@
-import { execSync } from 'child_process';
+import { exec } from 'child_process';
 import { writeFileSync } from 'fs';
 import { Router } from 'express';
 import bodyParser from 'body-parser';
@@ -19,16 +19,18 @@ api.post('/test-code', (req, res) => {
   switch(language) {
     case 'javascript':
       writeFileSync('/tmp/contest/test.js', code)
-      stdout = execSync('docker run -t --rm -v /tmp/contest:/contest botify/contest/js')
+      const startTime = new Date();
+      stdout = exec('docker run -t --rm -v /tmp/contest:/contest botify/contest/js', (err, stdout) => {
+        const executionTime = new Date() - startTime;
+        console.log(err !== null ? err.code : 0)
+        res.json({
+          success: err !== null ? err.code : 0,
+          timeMs: executionTime,
+          stdout: stdout,
+        });
+      })
       break;
   }
-
-  // MOCK
-  res.json({
-    success: getRandomInt(0, 3) > 0,
-    timeMs: getRandomInt(200, 1000),
-    stdout: stdout,
-  });
 });
 
 api.post('/register', (req, res) => {
