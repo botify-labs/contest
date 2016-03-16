@@ -7,9 +7,11 @@
     "install:db": "node ./scripts/installDB",
     "build:webpack": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:webpack",
+    "build:docker:js": "docker build -t botify/contest/js -f challenges/js/Dockerfile challenges",
+    "build:docker": "npm run build:docker:js",
+    "postinstall": "npm run install:db && npm run build:docker",
     "start": "node start.js",
-    "lint": "eslint src",
-    "build:docker:js": "docker build -t botify/contest/js -f test/js/Dockerfile test"
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",

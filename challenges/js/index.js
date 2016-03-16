@@ -1,7 +1,8 @@
+require('babel-register')
 const assert = require('assert')
 const fs = require('fs')
 
-const contest = require('/contest/test.js')
+const contest = require('/contest/test.js').isPalindrome
 
 const fileContent = fs.readFileSync('./palindrome', { encoding: 'utf8' })
 

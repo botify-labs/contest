@@ -22,9 +22,8 @@ api.post('/test-code', (req, res) => {
       const startTime = new Date();
       stdout = exec('docker run -t --rm -v /tmp/contest:/contest botify/contest/js', (err, stdout) => {
         const executionTime = new Date() - startTime;
-        console.log(err !== null ? err.code : 0)
         res.json({
-          success: err !== null ? err.code : 0,
+          success: err !== null ? false : true,
           timeMs: executionTime,
           stdout: stdout,
         });
