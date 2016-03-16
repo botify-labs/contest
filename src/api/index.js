@@ -3,7 +3,6 @@ import { writeFileSync } from 'fs';
 import { Router } from 'express';
 import bodyParser from 'body-parser';
 import sqlite3 from 'sqlite3';
-import { getRandomInt } from './utils';
 
 const db = new sqlite3.Database('botify-contest');
 const api = new Router();
@@ -15,19 +14,18 @@ api.use(bodyParser.json());
 api.post('/test-code', (req, res) => {
   const { language, code } = req.body;
 
-  let stdout = '';
   switch(language) {
     case 'javascript':
-      writeFileSync('/tmp/contest/test.js', code)
+      writeFileSync('/tmp/contest/test.js', code);
       const startTime = new Date();
-      stdout = exec('docker run -t --rm -v /tmp/contest:/contest botify/contest/js', (err, stdout) => {
+      exec('docker run -t --rm -v /tmp/contest:/contest botify/contest/js', (err, stdout) => {
         const executionTime = new Date() - startTime;
         res.json({
-          success: err !== null ? false : true,
+          success: err === null,
           timeMs: executionTime,
-          stdout: stdout,
+          stdout,
         });
-      })
+      });
       break;
   }
 });
