@@ -16,9 +16,9 @@ api.post('/test-code', (req, res) => {
 
   switch(language) {
     case 'javascript':
-      writeFileSync('/tmp/contest/test.js', code);
+      writeFileSync('tmp/test.js', code);
       const startTime = new Date();
-      exec('docker run -t --rm -v /tmp/contest:/contest botify/contest/js', (err, stdout) => {
+      exec('docker run -t --rm -v $(pwd)/tmp:/contest botify/contest/js', (err, stdout) => {
         const executionTime = new Date() - startTime;
         res.json({
           success: err === null,

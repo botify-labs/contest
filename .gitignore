@@ -4,3 +4,4 @@ botify-contest-journal
 node_modules
 npm-debug.log
 dist
+tmp
