@@ -17,17 +17,18 @@ app.use(webpackDevMiddleware(compiler, {
 
 app.use(webpackHotMiddleware(compiler));
 
-app.use('/public', express.static('public'));
-
 app.use('/api', api);
 
 app.get('/users', (req, res) => {
   res.sendFile(path.join(__dirname, 'src/users-app/index.html'));
 });
 
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'src/contest-app/index.html'));
 });
+
+// Serve Ace Editor sources locally (it requires files using RequireJS)
+app.use(express.static('node_modules/ace-builds/src-min'));
 
 app.listen(3000, (err) => {
   if (err) {

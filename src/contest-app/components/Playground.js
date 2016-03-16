@@ -1,11 +1,13 @@
 import React, { PropTypes } from 'react';
 import AceEditor from 'react-ace-async';
+import * as AceEditorConfig from 'react-ace-async/src/config';
 import cx from 'classnames';
 
 import { testCode } from '../resources/api';
 import * as playgroundBoilerplates from '../resources/playgroundBoilerplates';
 
 import './Playground.scss';
+AceEditorConfig.ACE_CDN = 'ace.js';
 
 
 class Playground extends React.Component {
@@ -81,6 +83,7 @@ class Playground extends React.Component {
             theme="monokai"
             mode={language}
             value={editorValue}
+            tabSize={2}
           />
         </div>
         <div className="Playground-rightSide">
@@ -92,6 +95,7 @@ class Playground extends React.Component {
                 theme="monokai"
                 mode="io"
                 value={result.stdout}
+                readOnly
               />
             }
             {result &&

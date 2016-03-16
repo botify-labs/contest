@@ -58,6 +58,7 @@
     "webpack-hot-middleware": "^2.9.1"
   },
   "dependencies": {
+    "ace-builds": "^1.2.2",
     "body-parser": "^1.15.0",
     "bootstrap": "^3.3.6",
     "classnames": "^2.2.3",
