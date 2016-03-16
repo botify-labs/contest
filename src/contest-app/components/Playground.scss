@@ -2,6 +2,7 @@
 .Playground {
   display: flex;
   margin: 5px -10px;
+  height: calc(100% - 10px);
 
   .Playground-leftSide {
     display: flex;
@@ -10,6 +11,7 @@
     margin-right: 10px;
 
     .Playground-explanation {
+      flex: 0 0 auto;
       margin-bottom: 5px;
       padding: 10px;
       font-weight: 200;
@@ -28,7 +30,7 @@
     }
 
     .Playground-editor {
-      height: 500px;
+      flex: 1 1 auto;
     }
   }
 
