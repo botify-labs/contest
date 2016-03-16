@@ -1,5 +1,13 @@
-$main-color: #47c9af;
+$color-main: #47c9af;
+$color-orange: #F19B2E;
 
-body.color-main {
-  background-color: $main-color !important;
+
+body {
+  &.color-main {
+    background-color: $color-main !important;
+  }
+
+  &.color-orange {
+    background-color: $color-orange !important;
+  }
 }

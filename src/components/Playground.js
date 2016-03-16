@@ -22,6 +22,7 @@ class Playground extends React.Component {
       editorValue: playgroundBoilerplates[language],
       testing: false,
       result: null,
+      bestResult: null,
     };
 
     this.handleRunPlayground = this.handleRunPlayground.bind(this);
@@ -39,9 +40,11 @@ class Playground extends React.Component {
     console.log('run', editorValue);
 
     testCode(language, editorValue).then((result) => {
+      const { bestResult } = this.state;
       this.setState({
         result,
         testing: false,
+        bestResult: !bestResult || result.timeMs < bestResult.timeMs ? result : bestResult,
       });
     });
   }
@@ -52,7 +55,7 @@ class Playground extends React.Component {
 
   render() {
     const { language } = this.props;
-    const { editorValue, testing, result } = this.state;
+    const { editorValue, testing, result, bestResult } = this.state;
 
     return (
       <div className="Playground">
@@ -92,8 +95,13 @@ class Playground extends React.Component {
               />
             }
             {result &&
-              <div className="Playground-resultTime">
-                {result.timeMs} ms
+              <div
+                className={cx(
+                  'Playground-resultTime',
+                  result.success ? 'btn-success' : 'btn-danger'
+                )}
+              >
+                {result.success ? `${result.timeMs} ms` : 'Tests failed'}
               </div>
             }
           </div>
@@ -107,13 +115,13 @@ class Playground extends React.Component {
             <button
               className={cx(
                 'Playground-actions-run form-control',
-                result && result.success && 'btn-success',
-                result && !result.success && 'btn-danger'
+                bestResult && bestResult.success && 'btn-success',
               )}
               onClick={this.handleSavePlayground}
-              disabled={!result || !result.success}
+              disabled={!bestResult || !bestResult.success}
             >
               Save
+              {bestResult && bestResult.success && `(best time: ${bestResult.timeMs} ms)`}
             </button>
           </div>
         </div>

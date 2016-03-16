@@ -15,11 +15,11 @@ export default class LanguageChooser extends React.Component {
   }
 
   componentWillMount() {
-    document.body.className += 'color-main';
+    document.body.className += 'color-orange';
   }
 
   componentWillUnmount() {
-    document.body.className = document.body.className.replace('color-main', '');
+    document.body.className = document.body.className.replace('color-orange', '');
   }
 
   handleChooseJs() {
