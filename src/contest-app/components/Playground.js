@@ -103,7 +103,7 @@ class Playground extends React.Component {
               <div
                 className="Playground-resultPreview"
                 dangerouslySetInnerHTML={{
-                  __html: ansiToHTML.toHtml(result.stdout),
+                  __html: ansiToHTML.toHtml(result.stdout).replace(/KG/g, '-'),
                 }}
               />
             }
