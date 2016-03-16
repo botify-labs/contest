@@ -63,7 +63,7 @@ class Playground extends React.Component {
       <div className="Playground">
         <div className="Playground-leftSide">
           <div className="Playground-explanation jumbotron">
-            <h1>The Palindrome dilema</h1>
+            <h1>The Palindrome dilemma</h1>
             <h2>Write an algorithm that tests if a string is a palindrome.</h2>
             <p><b>Palindrome:</b> A palindrome is a word, phrase, number, or other
             sequence of characters which reads the same backward or forward.
