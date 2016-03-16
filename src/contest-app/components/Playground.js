@@ -101,7 +101,7 @@ class Playground extends React.Component {
                 className="Playground-resultPreview"
                 id="Playground-resultPreview"
                 theme="monokai"
-                mode="io"
+                mode="sh"
                 value={result.stdout}
                 readOnly
               />

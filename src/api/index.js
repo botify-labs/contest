@@ -14,20 +14,28 @@ api.use(bodyParser.json());
 api.post('/test-code', (req, res) => {
   const { language, code } = req.body;
 
+  let codeFile;
+  let challengeFolder;
   switch(language) {
     case 'javascript':
-      writeFileSync('tmp/test.js', code);
-      const startTime = new Date();
-      exec('docker run -t --rm -v $(pwd)/tmp:/contest botify/contest/js', (err, stdout) => {
-        const executionTime = new Date() - startTime;
-        res.json({
-          success: err === null,
-          timeMs: executionTime,
-          stdout,
-        });
-      });
+      codeFile = 'tmp/test.js';
+      challengeFolder = 'botify/contest/js';
       break;
   }
+
+  writeFileSync(codeFile, code);
+  const startTime = new Date();
+  exec('docker run -t --rm -v $(pwd)/tmp:/contest ' + challengeFolder, (err, stdout) => {
+    const executionTime = new Date() - startTime;
+    res.json({
+      success: err === null,
+      timeMs: executionTime,
+      stdout,
+    });
+    if (err) {
+      console.error(stdout);
+    }
+  });
 });
 
 api.post('/register', (req, res) => {
