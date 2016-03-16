@@ -1,3 +1,5 @@
+import { exec } from 'child_process';
+import { writeFileSync } from 'fs';
 import { Router } from 'express';
 import bodyParser from 'body-parser';
 import sqlite3 from 'sqlite3';
@@ -13,12 +15,21 @@ api.use(bodyParser.json());
 api.post('/test-code', (req, res) => {
   const { language, code } = req.body;
 
-  // MOCK
-  res.json({
-    success: getRandomInt(0, 3) > 0,
-    timeMs: getRandomInt(200, 1000),
-    stdout: 'BLABLABLABLA',
-  });
+  let stdout = '';
+  switch(language) {
+    case 'javascript':
+      writeFileSync('/tmp/contest/test.js', code)
+      const startTime = new Date();
+      stdout = exec('docker run -t --rm -v /tmp/contest:/contest botify/contest/js', (err, stdout) => {
+        const executionTime = new Date() - startTime;
+        res.json({
+          success: err !== null ? false : true,
+          timeMs: executionTime,
+          stdout: stdout,
+        });
+      })
+      break;
+  }
 });
 
 api.post('/register', (req, res) => {
