@@ -2,7 +2,7 @@ FROM ubuntu:14.04
 
 WORKDIR /app
 
-RUN apt-get install python
+RUN apt-get install python && apt get-install python-pip && pip install unittest
 
 ADD python /app
 
