@@ -30,12 +30,14 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: {
     'contest-app': [
-      // necessary for hot reloading with IE:
       'eventsource-polyfill',
-      // listen to code updates emitted by hot middleware:
       'webpack-hot-middleware/client',
-      // your code:
       './src/contest-app/index',
+    ],
+    'users-app': [
+      'eventsource-polyfill',
+      'webpack-hot-middleware/client',
+      './src/users-app/index',
     ],
   },
   resolve: {

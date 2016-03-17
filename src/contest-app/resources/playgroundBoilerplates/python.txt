@@ -1,8 +1,8 @@
 
 #
 # Returns true if the input is a palindrome.
-# @param  {String} input  string to evaluate
+# @param  {str} input  string to evaluate
 # @return {Boolean}
 #
-def isPalindrome (input):
+def isPalindrome (str):
   return true

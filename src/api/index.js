@@ -55,8 +55,13 @@ api.post('/register', (req, res) => {
 
 api.get('/users', (req, res) => {
   db.serialize(() => {
-    db.all('SELECT *, info FROM Users', (err, rows) => {
-      res.json(rows);
+    db.all('SELECT * FROM Users ORDER BY time ASC', (err, rows) => {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        res.json(rows);
+      }
     });
   });
 });

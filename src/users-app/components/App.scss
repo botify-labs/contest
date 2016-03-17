@@ -1,0 +1,13 @@
+.App {
+  .App-users {
+    display: flex;
+
+    > * + * {
+      margin-left: 10px;
+    }
+
+    .App-users-table {
+      word-break: break-all;
+    }
+  }
+}
