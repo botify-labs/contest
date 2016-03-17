@@ -1,9 +1,11 @@
-FROM alpine
+FROM ubuntu:14.04
 
 WORKDIR /app
 
-RUN apk update && \
-    apk add nodejs && \
+RUN apt-get update && \
+    apt-get install -y curl && \
+    curl -sL https://deb.nodesource.com/setup_5.x | bash - && \
+    apt-get install -y nodejs && \
     npm install -g mocha babel-cli && \
     npm install babel-preset-es2015
 
