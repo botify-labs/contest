@@ -1,5 +1,6 @@
 import React from 'react';
 import AceEditor from 'react-ace-async';
+import cx from 'classnames';
 import { getUsers } from '../resources/api';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -13,6 +14,11 @@ export default class App extends React.Component {
     this.state = {
       users: [],
       selectedUser: null,
+      thresholds: {
+        javascript: 300,
+        python: 200,
+        golang: 100,
+      },
     };
   }
 
@@ -38,8 +44,17 @@ export default class App extends React.Component {
     });
   }
 
+  updateThreshold(language, value) {
+    this.setState({
+      thresholds: {
+        ...this.state.thresholds,
+        [language]: value,
+      },
+    });
+  }
+
   render() {
-    const { users, selectedUser } = this.state;
+    const { users, selectedUser, thresholds } = this.state;
 
     const usersByLanguage = users.reduce((res, user) => {
       if (!res[user.language]) {
@@ -52,7 +67,7 @@ export default class App extends React.Component {
 
     return (
       <div className="App container-fluid">
-        <div className="App-users">
+        <div className="App-users App-leftSide">
           {languages.map(language =>
             <div
               key={language}
@@ -72,7 +87,10 @@ export default class App extends React.Component {
                 {usersByLanguage[language].map(user =>
                   <tr
                     key={user.id}
-                    className={selectedUser && selectedUser.id === user.id && 'active'}
+                    className={cx(
+                      selectedUser && selectedUser.id === user.id && 'active',
+                      user.time - thresholds[language] < usersByLanguage[language][0].time && 'info',
+                    )}
                     onClick={() => this.selectUser(user)}
                   >
                     <td>{user.name}</td>
@@ -85,16 +103,36 @@ export default class App extends React.Component {
             </div>
           )}
         </div>
-        {selectedUser &&
-          <AceEditor
-            className="App-userCode form-control"
-            id="App-userCode"
-            theme="monokai"
-            mode={selectedUser.language}
-            value={selectedUser.code}
-            tabSize={2}
-          />
-        }
+        <div className="App-rightSide">
+          <div className="App-winnerPick">
+            <h3>Threshold</h3>
+            <form>
+              {languages.map(language =>
+              <div className="form-group">
+                <label>{language}</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  value={thresholds[language]}
+                  step="10"
+                  onChange={(e) => this.updateThreshold(language, e.target.value)}
+                />
+              </div>
+              )}
+              <button className="btn btn-primary" onClick={this.pickWinner}>Pick Winner</button>
+            </form>
+          </div>
+          {selectedUser &&
+            <AceEditor
+              className="App-userCode form-control"
+              id="App-userCode"
+              theme="monokai"
+              mode={selectedUser.language}
+              value={selectedUser.code}
+              tabSize={2}
+            />
+          }
+        </div>
       </div>
     );
   }

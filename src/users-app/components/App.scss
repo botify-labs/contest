@@ -20,7 +20,12 @@
     }
   }
 
-  .App-userCode {
+  .App-rightSide {
     flex: 1 0 30%;
+    margin-left: 5px;
+
+    .App-winnerPick {
+      margin-bottom: 10px;
+    }
   }
 }
