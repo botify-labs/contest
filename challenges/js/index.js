@@ -7,8 +7,9 @@ const fileContent = fs.readFileSync('./palindrome', { encoding: 'utf8' });
 
 describe('Contest function test', () => {
   fileContent.split('\n').forEach(p => {
-    const testString = p.split('\t')[0];
-    const isPalindrome = p.split('\t')[1] === 'T';
+    const temp = p.split('\t');
+    const testString = temp[0];
+    const isPalindrome = temp[1] === 'T';
     it(testString, () => {
       assert.equal(contest(testString), isPalindrome);
     });
