@@ -9,6 +9,7 @@ class TestPalindrome(unittest.TestCase):
             str_to_test, _is_a_palindrome = line.split('\t')
             is_a_palindrome = _is_a_palindrome == 'T\n'
             self.assertEqual(isPalyndrome(str_to_test), is_a_palindrome)
+            print str_to_test
 
 if __name__ == '__main__':
     unittest.main()
