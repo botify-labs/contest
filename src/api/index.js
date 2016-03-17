@@ -22,7 +22,7 @@ api.post('/test-code', (req, res) => {
       dockerImage = 'botify/contest/js';
       break;
     case 'python':
-      codeFile = 'tmp/python.js';
+      codeFile = 'tmp/test.py';
       dockerImage = 'botify/contest/python';
       break;
   }
