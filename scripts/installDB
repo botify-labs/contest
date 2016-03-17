@@ -2,12 +2,13 @@
 
 /* eslint no-var: 0 */
 
-console.log('Install database...')
-
 var sqlite3 = require('sqlite3');
 var db = new sqlite3.Database('botify-contest');
 
+console.log('Install database...');
+
 db.run('CREATE TABLE IF NOT EXISTS Users ( \
+  id INTEGER PRIMARY KEY   AUTOINCREMENT, \
   name VARCHAR(50), \
   email VARCHAR(50), \
   language VARCHAR(10), \

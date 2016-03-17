@@ -1,13 +1,26 @@
 .App {
+  display: flex;
+
   .App-users {
     display: flex;
+    flex: 1 0 70%;
 
     > * + * {
       margin-left: 10px;
     }
 
-    .App-users-table {
+    .App-users-table {
       word-break: break-all;
+
+      tbody {
+        tr:not(.active) {
+          cursor: pointer;
+        }
+      }
     }
+  }
+
+  .App-userCode {
+    flex: 1 0 30%;
   }
 }
