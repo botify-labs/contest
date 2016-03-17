@@ -14,24 +14,19 @@ export default class App extends React.Component {
     this.state = {
       users: [],
       selectedUser: null,
+      winner: null,
       thresholds: {
         javascript: 300,
         python: 200,
         golang: 100,
       },
     };
+
+    this.pickWinner = this.pickWinner.bind(this);
   }
 
   componentDidMount() {
     getUsers().then(users => {
-      users.push({
-        id: -1,
-        name: 'toto',
-        email: 'boo',
-        language: 'python',
-        time: 30,
-        code: 'dzqzdzqqdz',
-      });
       this.setState({
         users,
       });
@@ -53,17 +48,31 @@ export default class App extends React.Component {
     });
   }
 
-  render() {
-    const { users, selectedUser, thresholds } = this.state;
+  pickWinner(e) {
+    e.preventDefault();
+    const { users, thresholds } = this.state;
+    const [usersByLanguage, languages] = processUsers(users, thresholds);
 
-    const usersByLanguage = users.reduce((res, user) => {
-      if (!res[user.language]) {
-        res[user.language] = []; // eslint-disable-line no-param-reassign
-      }
-      res[user.language].push(user);
-      return res;
-    }, {});
-    const languages = Object.keys(usersByLanguage);
+    const usersPoll = [];
+    languages.forEach(language => {
+      usersByLanguage[language].forEach(user => {
+        if (user.canWin) {
+          usersPoll.push(user);
+        }
+      });
+    });
+
+    const winner = usersPoll[getRandomInt(0, usersPoll.length)];
+
+    this.setState({
+      winner,
+      selectedUser: winner,
+    });
+  }
+
+  render() {
+    const { users, selectedUser, winner, thresholds } = this.state;
+    const [usersByLanguage, languages] = processUsers(users, thresholds);
 
     return (
       <div className="App container-fluid">
@@ -88,8 +97,10 @@ export default class App extends React.Component {
                   <tr
                     key={user.id}
                     className={cx(
-                      selectedUser && selectedUser.id === user.id && 'active',
-                      user.time - thresholds[language] < usersByLanguage[language][0].time && 'info',
+                        winner && winner.id === user.id ? 'success'
+                      : selectedUser && selectedUser.id === user.id ? 'active'
+                      : user.canWin ? 'info'
+                      : null
                     )}
                     onClick={() => this.selectUser(user)}
                   >
@@ -136,4 +147,28 @@ export default class App extends React.Component {
       </div>
     );
   }
+}
+
+function processUsers(users, thresholds) {
+  const usersByLanguage = users.reduce((res, user) => {
+    if (!res[user.language]) {
+      res[user.language] = [{
+        ...user,
+        canWin: true,
+      }];
+    } else {
+      res[user.language].push({
+        ...user,
+        canWin: user.time - thresholds[user.language] < res[user.language][0].time,
+      });
+    }
+    return res;
+  }, {});
+  const languages = Object.keys(usersByLanguage);
+
+  return [usersByLanguage, languages];
+}
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
 }
