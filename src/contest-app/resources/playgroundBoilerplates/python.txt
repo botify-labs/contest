@@ -5,4 +5,4 @@
 # @return {Boolean}
 #
 def isPalindrome (str):
-  return true
+  return True
