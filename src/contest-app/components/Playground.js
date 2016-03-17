@@ -114,7 +114,8 @@ class Playground extends React.Component {
                   result.success ? 'success' : 'danger'
                 )}
               >
-                {result.success ? `${result.timeMs} ms` : 'Tests failed'}
+                {result.success ? 'Success' : 'Tests failed'}
+                {` (${result.timeMs} ms)`}
               </div>
             }
             {testing &&
