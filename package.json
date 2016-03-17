@@ -9,7 +9,9 @@
     "build:webpack": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:webpack",
     "build:docker:js": "docker build -t botify/contest/js -f challenges/js/Dockerfile challenges",
+    "build:docker:python": "docker build -t botify/contest/python -f challenges/python/Dockerfile challenges",
     "build:docker": "npm run build:docker:js",
+    "build:docker": "npm run build:docker:python",
     "postinstall": "npm run install:tmp && npm run install:db && npm run build:docker",
     "start": "node start.js",
     "lint": "eslint src"
