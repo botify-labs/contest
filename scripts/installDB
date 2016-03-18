@@ -10,10 +10,10 @@ console.log('Install database...');
 db.run('CREATE TABLE IF NOT EXISTS Users ( \
   id INTEGER PRIMARY KEY   AUTOINCREMENT, \
   name VARCHAR(50), \
-  email VARCHAR(50), \
+  email VARCHAR(100), \
   language VARCHAR(10), \
   time SMALLINT, \
-  code VARCHAR(1000) \
+  code VARCHAR(2000) \
 )');
 
 db.close();

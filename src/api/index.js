@@ -46,14 +46,22 @@ api.post('/register', (req, res) => {
   const { name, email, language, timeMs, code } = req.body;
 
   db.serialize(() => {
-    db.run('INSERT INTO Users (name, email, language, time, code) VALUES (?, ?, ?, ?, ?)', name, email, language, timeMs, code, err => {
-      if (err) {
-        console.error(err);
-        res.status(500).end();
-      } else {
-        res.status(201).end();
+    db.run(
+      'INSERT INTO Users (name, email, language, time, code) VALUES (?, ?, ?, ?, ?)',
+      name.substring(0, 50),
+      email.substring(0, 100),
+      language,
+      timeMs,
+      code.substring(0, 2000),
+        err => {
+        if (err) {
+          console.error(err);
+          res.status(500).end();
+        } else {
+          res.status(201).end();
+        }
       }
-    });
+    );
   });
 });
 
