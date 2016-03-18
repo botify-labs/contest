@@ -4,5 +4,5 @@
 # @param  {str} input  string to evaluate
 # @return {Boolean}
 #
-def isPalindrome (str):
-  return true
+def isPalindrome (str_to_test):
+  return True
