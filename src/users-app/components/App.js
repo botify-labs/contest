@@ -16,9 +16,9 @@ export default class App extends React.Component {
       selectedUser: null,
       winner: null,
       thresholds: {
-        javascript: 300,
-        python: 200,
-        golang: 100,
+        javascript: 15,
+        python: 15,
+        golang: 15,
       },
     };
 
