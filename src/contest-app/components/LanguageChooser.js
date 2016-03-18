@@ -12,6 +12,7 @@ export default class LanguageChooser extends React.Component {
     super(props);
     this.handleChooseJs = this.handleChooseJs.bind(this);
     this.handleChoosePython = this.handleChoosePython.bind(this);
+    this.handleChooseGo = this.handleChooseGo.bind(this);
   }
 
   componentWillMount() {
@@ -30,6 +31,10 @@ export default class LanguageChooser extends React.Component {
     this.props.onChoose('python');
   }
 
+  handleChooseGo() {
+    this.props.onChoose('golang');
+  }
+
   render() {
     return (
       <div className="LanguageChooser">
@@ -38,6 +43,8 @@ export default class LanguageChooser extends React.Component {
           <button onClick={this.handleChooseJs}>JS</button>
           <span>vs</span>
           <button onClick={this.handleChoosePython}>Python</button>
+          <span>vs</span>
+          <button onClick={this.handleChooseGo}>Go</button>
         </div>
       </div>
     );

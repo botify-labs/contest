@@ -1,0 +1,9 @@
+package palindrome
+
+import "fmt"
+
+// Should return a truthy value is string is a palyndrome, false otherwise.
+func IsPalindrome(str string) bool {
+  fmt.Println("testint string " + str)
+  return true
+}
