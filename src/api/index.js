@@ -25,6 +25,9 @@ api.post('/test-code', (req, res) => {
       codeFile = 'tmp/test.py';
       dockerImage = 'botify/contest/python';
       break;
+    case 'golang':
+      codeFile = 'tmp/test.go';
+      dockerImage = 'botify/contest/golang';
   }
 
   writeFileSync(codeFile, code);

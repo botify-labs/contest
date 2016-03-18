@@ -10,7 +10,8 @@
     "build": "npm run clean && npm run build:webpack",
     "build:docker:js": "docker build -t botify/contest/js -f challenges/js/Dockerfile challenges",
     "build:docker:python": "docker build -t botify/contest/python -f challenges/python/Dockerfile challenges",
-    "build:docker": "npm run build:docker:js && npm run build:docker:python",
+    "build:docker:golang": "docker build -t botify/contest/golang -f challenges/golang/Dockerfile challenges",
+    "build:docker": "npm run build:docker:js && npm run build:docker:python && npm run build:docker:golang",
     "postinstall": "npm run install:tmp && npm run install:db && npm run build:docker",
     "start": "node start.js",
     "lint": "eslint src"
